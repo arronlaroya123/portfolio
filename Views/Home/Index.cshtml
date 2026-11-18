@@ -1,8 +1,93 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container py-5">
+
+    <div class="row align-items-center py-5">
+
+        <div class="col-lg-8">
+
+            <p class="text-uppercase text-muted fw-bold">
+                Welcome to My Portfolio
+            </p>
+
+            <h1 class="display-4 fw-bold mb-3">
+                Hello, I'm a Multimedia Student.
+            </h1>
+
+            <p class="lead text-muted mb-4">
+                Welcome to my academic portfolio. Here you can explore
+                the courses I have taken, the projects I have created,
+                and my learning experiences.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <a asp-controller="Courses"
+                   asp-action="Index"
+                   class="btn btn-primary btn-lg">
+                    Explore Courses
+                </a>
+
+                <a asp-controller="Projects"
+                   asp-action="Index"
+                   class="btn btn-outline-dark btn-lg">
+                    View My Projects
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr class="my-5" />
+
+    <div class="row g-4">
+
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <h3 class="fw-bold">My Courses</h3>
+
+                    <p class="text-muted">
+                        Discover the subjects and courses that
+                        contributed to my learning journey.
+                    </p>
+
+                    <a asp-controller="Courses"
+                       asp-action="Index"
+                       class="btn btn-outline-primary">
+                        View Courses
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <h3 class="fw-bold">My Projects</h3>
+
+                    <p class="text-muted">
+                        Explore my academic projects, images,
+                        and multimedia presentations.
+                    </p>
+
+                    <a asp-controller="Projects"
+                       asp-action="Index"
+                       class="btn btn-outline-primary">
+                        View Projects
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>

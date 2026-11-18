@@ -1,7 +1,24 @@
+using Npgsql;
+using portfolio.Data;
+using portfolio.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Database Connection
+var connectionString = builder.Configuration
+    .GetConnectionString("Portfolio");
+
+builder.Services.AddSingleton<NpgsqlDataSource>(sp =>
+    NpgsqlDataSource.Create(connectionString!));
+
+// Register services
+builder.Services.AddScoped<DatabaseTest>();
+builder.Services.AddScoped<CourseRepository>();
+builder.Services.AddScoped<ProjectRepository>();
+builder.Services.AddScoped<ProjectImageRepository>();
 
 var app = builder.Build();
 
@@ -9,7 +26,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -24,6 +40,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

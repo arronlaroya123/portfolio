@@ -1,0 +1,79 @@
+﻿@model portfolio.Models.Course
+
+@{
+    ViewData["Title"] = "Add Course";
+}
+
+<div class="container py-5">
+
+    <h1 class="fw-bold mb-2">Add New Course</h1>
+    <p class="text-muted mb-4">
+        Enter the details of your course.
+    </p>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+
+            <form asp-action="Create" method="post">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="CourseCode" class="form-label">
+                        Course Code
+                    </label>
+
+                    <input asp-for="CourseCode"
+                           class="form-control"
+                           placeholder="Example: DBMWEB1" />
+
+                    <span asp-validation-for="CourseCode"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CourseTitle" class="form-label">
+                        Course Title
+                    </label>
+
+                    <input asp-for="CourseTitle"
+                           class="form-control"
+                           placeholder="Enter course title" />
+
+                    <span asp-validation-for="CourseTitle"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">
+                        Description
+                    </label>
+
+                    <textarea asp-for="Description"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Enter course description"></textarea>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        Save Course
+                    </button>
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
