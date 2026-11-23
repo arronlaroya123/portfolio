@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Npgsql;
 using portfolio.Models;
 using portfolio.Repositories;
@@ -24,6 +25,7 @@ namespace portfolio.Controllers
             _courseRepository = courseRepository;
         }
 
+        // VIEW PROJECTS - PUBLIC
         public async Task<IActionResult> Index()
         {
             var projects = await _projectRepository.GetAllAsync();
@@ -37,6 +39,7 @@ namespace portfolio.Controllers
             return View(projects);
         }
 
+        // VIEW PROJECT DETAILS - PUBLIC
         public async Task<IActionResult> Details(long id)
         {
             var project = await _projectRepository.GetByIdAsync(id);
@@ -92,7 +95,7 @@ namespace portfolio.Controllers
             }
         }
 
-        // Automatically converts common YouTube links to embed URLs.
+        // CONVERT YOUTUBE URL TO EMBED URL
         private string? NormalizeVideoUrl(string? videoUrl)
         {
             if (string.IsNullOrWhiteSpace(videoUrl))
@@ -134,13 +137,11 @@ namespace portfolio.Controllers
 
             string? videoId = null;
 
-            // Short URL: youtu.be/VIDEO_ID
             if (host == "youtu.be")
             {
                 if (parts.Length > 0)
                     videoId = parts[0];
             }
-            // Normal URL: youtube.com/watch?v=VIDEO_ID
             else if (parts.Length > 0 &&
                      parts[0].Equals(
                          "watch",
@@ -160,7 +161,6 @@ namespace portfolio.Controllers
                     }
                 }
             }
-            // Shorts, Live, Embed and old video URL formats
             else if (parts.Length > 1 &&
                      (parts[0].Equals("shorts", StringComparison.OrdinalIgnoreCase) ||
                       parts[0].Equals("live", StringComparison.OrdinalIgnoreCase) ||
@@ -183,6 +183,8 @@ namespace portfolio.Controllers
             return $"https://www.youtube-nocookie.com/embed/{videoId}";
         }
 
+        // CREATE PROJECT - EDITOR ONLY
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Create()
         {
             await LoadCoursesAsync();
@@ -190,6 +192,7 @@ namespace portfolio.Controllers
             return View(new ProjectCreateViewModel());
         }
 
+        [Authorize(Roles = "Editor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProjectCreateViewModel model)
@@ -234,6 +237,8 @@ namespace portfolio.Controllers
             return View(model);
         }
 
+        // EDIT PROJECT - EDITOR ONLY
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Edit(long id)
         {
             var project = await _projectRepository.GetByIdAsync(id);
@@ -260,6 +265,7 @@ namespace portfolio.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Editor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
@@ -313,28 +319,26 @@ namespace portfolio.Controllers
             return View(model);
         }
 
+        // DELETE PROJECT - EDITOR ONLY
+        [Authorize(Roles = "Editor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(long id)
         {
             try
             {
-                bool deleted = await _projectRepository.DeleteAsync(id);
-
-                if (!deleted)
-                    return NotFound();
+                await _projectRepository.DeleteAsync(id);
 
                 TempData["Success"] = "Project deleted successfully!";
-
-                return RedirectToAction(nameof(Index));
             }
-            catch (PostgresException ex) when (ex.SqlState == "23503")
+            catch (PostgresException)
             {
                 TempData["Error"] =
-                    "Cannot delete this project because it has related records.";
-
-                return RedirectToAction(nameof(Index));
+                    "Unable to delete this project.";
             }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
+    

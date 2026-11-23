@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Npgsql;
 using portfolio.Models;
 using portfolio.Repositories;
@@ -14,11 +16,14 @@ namespace portfolio.Controllers
             _courseRepository = courseRepository;
         }
 
+        // VIEW COURSES - PUBLIC
         public async Task<IActionResult> Index()
         {
             return View(await _courseRepository.GetAllAsync());
         }
 
+        // CREATE - EDITOR ONLY
+        [Authorize(Roles = "Editor")]
         public IActionResult Create()
         {
             return View();
@@ -26,6 +31,7 @@ namespace portfolio.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Create(Course course)
         {
             if (!ModelState.IsValid)
@@ -40,10 +46,13 @@ namespace portfolio.Controllers
             {
                 ModelState.AddModelError("CourseCode",
                     "This course code already exists.");
+
                 return View(course);
             }
         }
 
+        // EDIT - EDITOR ONLY
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Edit(long id)
         {
             var course = await _courseRepository.GetByIdAsync(id);
@@ -56,6 +65,7 @@ namespace portfolio.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Edit(long id, Course course)
         {
             if (id != course.CourseId)
@@ -73,12 +83,15 @@ namespace portfolio.Controllers
             {
                 ModelState.AddModelError("CourseCode",
                     "This course code already exists.");
+
                 return View(course);
             }
         }
 
+        // DELETE - EDITOR ONLY
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Delete(long id)
         {
             try

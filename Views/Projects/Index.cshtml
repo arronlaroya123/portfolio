@@ -14,17 +14,27 @@
             </p>
         </div>
 
-        <a asp-controller="Projects"
-           asp-action="Create"
-           class="btn btn-primary">
-            + Add Project
-        </a>
+        @if (User.IsInRole("Editor"))
+        {
+            <a asp-controller="Projects"
+               asp-action="Create"
+               class="btn btn-primary">
+                + Add Project
+            </a>
+        }
     </div>
 
     @if (TempData["Success"] != null)
     {
         <div class="alert alert-success">
             @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
         </div>
     }
 
@@ -83,7 +93,7 @@
 
                         </div>
 
-                        <div class="card-footer bg-white d-flex gap-2">
+                        <div class="card-footer bg-white d-flex flex-wrap gap-2">
 
                             <a asp-controller="Projects"
                                asp-action="Details"
@@ -92,12 +102,30 @@
                                 View
                             </a>
 
-                            <a asp-controller="Projects"
-                               asp-action="Edit"
-                               asp-route-id="@project.ProjectId"
-                               class="btn btn-outline-warning btn-sm">
-                                Edit
-                            </a>
+                            @if (User.IsInRole("Editor"))
+                            {
+                                <a asp-controller="Projects"
+                                   asp-action="Edit"
+                                   asp-route-id="@project.ProjectId"
+                                   class="btn btn-outline-warning btn-sm">
+                                    Edit
+                                </a>
+
+                                <form asp-controller="Projects"
+                                      asp-action="Delete"
+                                      asp-route-id="@project.ProjectId"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure you want to delete this project? All associated images will also be deleted.');">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm">
+                                        Delete
+                                    </button>
+
+                                </form>
+                            }
 
                         </div>
 

@@ -70,6 +70,44 @@
 
                     </ul>
 
+                    <ul class="navbar-nav">
+
+                        @if (User.IsInRole("Editor"))
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <span class="nav-link text-success fw-bold">
+                                    Editor Mode
+                                </span>
+                            </li>
+
+                            <li class="nav-item">
+                                <form asp-controller="Editor"
+                                      asp-action="SwitchToView"
+                                      method="post">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit"
+                                            class="btn btn-outline-secondary btn-sm mt-1">
+                                        Switch to View
+                                    </button>
+
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-primary btn-sm mt-1"
+                                   asp-controller="Editor"
+                                   asp-action="Unlock">
+                                    Switch to Editor
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
                 </div>
 
             </div>

@@ -1,0 +1,77 @@
+﻿@model portfolio.Models.EditorPasscodeViewModel
+
+@{
+    ViewData["Title"] = "Editor Access";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+
+                    <h2 class="fw-bold text-center mb-2">
+                        Editor Access
+                    </h2>
+
+                    <p class="text-muted text-center mb-4">
+                        Enter your passcode to switch to Editor Mode.
+                    </p>
+
+                    <form asp-controller="Editor"
+                          asp-action="Unlock"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               name="returnUrl"
+                               value="@ViewBag.ReturnUrl" />
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Passcode"
+                                   class="form-label">
+                                Passcode
+                            </label>
+
+                            <input asp-for="Passcode"
+                                   type="password"
+                                   class="form-control"
+                                   placeholder="Enter your passcode"
+                                   autocomplete="current-password" />
+
+                            <span asp-validation-for="Passcode"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Unlock Editor
+                        </button>
+
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="text-decoration-none">
+                            Back to View Mode
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
