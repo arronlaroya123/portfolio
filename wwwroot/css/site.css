@@ -1,31 +1,842 @@
+
+/* =====================================
+   HIGH-TECH PORTFOLIO - GLOBAL DESIGN
+===================================== */
+
+:root {
+    --tech-bg: #071521;
+    --tech-dark: #050d18;
+    --tech-panel: #102638;
+    --tech-blue: #087fa5;
+    --tech-cyan: #42d9ff;
+    --tech-white: #eaf8ff;
+    --tech-muted: #a9bdca;
+    --tech-border: rgba(66, 217, 255, .2);
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--tech-bg);
+    color: var(--tech-white);
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.tech-main {
+    flex: 1;
+    width: 100%;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* =====================================
+   NAVBAR
+===================================== */
+
+.tech-navbar {
+    background: rgba(5, 13, 24, .96);
+    border-bottom: 1px solid var(--tech-border);
+    padding: 17px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+}
+
+.tech-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff !important;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.brand-icon {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--tech-cyan);
+    color: var(--tech-cyan);
+    box-shadow: 0 0 12px rgba(66, 217, 255, .2);
+}
+
+.brand-dot {
+    color: var(--tech-cyan);
+    margin-left: -10px;
+}
+
+.tech-nav-link {
+    color: #a9bdca !important;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 12px 17px !important;
+    transition: .3s;
+}
+
+    .tech-nav-link:hover {
+        color: var(--tech-cyan) !important;
+        text-shadow: 0 0 12px rgba(66, 217, 255, .5);
+    }
+
+.tech-editor-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--tech-cyan);
+    color: var(--tech-cyan);
+    padding: 10px 16px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+    .tech-editor-btn:hover {
+        background: var(--tech-cyan);
+        color: var(--tech-dark);
+        box-shadow: 0 0 20px rgba(66, 217, 255, .3);
+    }
+
+.editor-status {
+    color: var(--tech-cyan);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background: #42e69a;
+    box-shadow: 0 0 10px #42e69a;
+}
+
+.tech-toggler {
+    border: 1px solid var(--tech-cyan);
+}
+
+    .tech-toggler .navbar-toggler-icon {
+        filter: invert(1);
+    }
+
+/* =====================================
+   GLOBAL CONTENT
+===================================== */
+
+.container {
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--tech-white);
+}
+
+p {
+    color: var(--tech-muted);
+}
+
+.text-muted {
+    color: var(--tech-muted) !important;
+}
+
+a {
+    transition: .3s;
+}
+
+/* =====================================
+   GLOBAL CARDS
+===================================== */
+
+.card {
+    background: linear-gradient(145deg, #102638, #091a28);
+    color: var(--tech-white);
+    border: 1px solid var(--tech-border);
+    border-radius: 12px;
+    transition: .3s;
+}
+
+    .card:hover {
+        border-color: var(--tech-cyan);
+        box-shadow: 0 8px 30px rgba(0, 180, 255, .1);
+    }
+
+.card-body {
+    color: var(--tech-white);
+}
+
+.card-title {
+    color: var(--tech-white);
+}
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+.btn-primary {
+    background: var(--tech-cyan);
+    border-color: var(--tech-cyan);
+    color: var(--tech-dark);
+    font-weight: 700;
+}
+
+    .btn-primary:hover {
+        background: #ffffff;
+        border-color: #ffffff;
+        color: var(--tech-dark);
+    }
+
+.btn-outline-primary {
+    color: var(--tech-cyan);
+    border-color: var(--tech-cyan);
+}
+
+    .btn-outline-primary:hover {
+        background: var(--tech-cyan);
+        border-color: var(--tech-cyan);
+        color: var(--tech-dark);
+    }
+
+.btn-outline-dark,
+.btn-outline-secondary {
+    color: var(--tech-cyan);
+    border-color: var(--tech-cyan);
+}
+
+    .btn-outline-dark:hover,
+    .btn-outline-secondary:hover {
+        background: var(--tech-cyan);
+        border-color: var(--tech-cyan);
+        color: var(--tech-dark);
+    }
+
+/* =====================================
+   FORMS
+===================================== */
+
+.form-control,
+.form-select {
+    background-color: #0b1c2a;
+    color: var(--tech-white);
+    border: 1px solid var(--tech-border);
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #0b1c2a;
+        color: #ffffff;
+        border-color: var(--tech-cyan);
+        box-shadow: 0 0 0 .2rem rgba(66, 217, 255, .15);
+    }
+
+    .form-control::placeholder {
+        color: #8298a8;
+    }
+
+.form-label {
+    color: var(--tech-white);
+}
+
+.form-check-label {
+    color: var(--tech-muted);
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--tech-muted);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 .1rem white, 0 0 0 .25rem var(--tech-cyan);
+}
+
+/* =====================================
+   TABLES
+===================================== */
+
+.table {
+    color: var(--tech-white);
+    border-color: var(--tech-border);
+}
+
+    .table th {
+        background: #102638;
+        color: var(--tech-cyan);
+    }
+
+    .table td {
+        background: #091a28;
+        color: var(--tech-white);
+    }
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.tech-footer {
+    background: #050d18;
+    border-top: 1px solid var(--tech-border);
+    padding: 25px 0;
+    margin-top: 50px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--tech-muted);
+}
+
+.footer-caption {
+    color: var(--tech-cyan);
+}
+
+/* =====================================
+   HOMEPAGE HERO
+===================================== */
+
+.tech-hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 80px 7%;
+    background: radial-gradient(circle at 80% 50%, #063b52 0%, transparent 35%), linear-gradient(135deg, #050d18, #091b2b 60%, #06111e);
+    color: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+
+    .tech-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(67, 210, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(67, 210, 255, .04) 1px, transparent 1px);
+        background-size: 45px 45px;
+        pointer-events: none;
+    }
+
+.tech-hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.tech-label {
+    color: var(--tech-cyan);
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.tech-hero h1 {
+    font-size: clamp(40px, 6vw, 76px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+    .tech-hero h1 span,
+    .tech-section-heading h2 span {
+        color: var(--tech-cyan);
+        text-shadow: 0 0 20px rgba(66, 217, 255, .4);
+    }
+
+.tech-description {
+    color: var(--tech-muted);
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 550px;
+}
+
+.tech-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.tech-btn,
+.tech-btn-outline {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.tech-btn {
+    color: var(--tech-dark);
+    background: var(--tech-cyan);
+    border: 1px solid var(--tech-cyan);
+}
+
+    .tech-btn span {
+        margin-left: 12px;
+    }
+
+    .tech-btn:hover {
+        background: #ffffff;
+        border-color: #ffffff;
+        color: var(--tech-dark);
+        box-shadow: 0 0 25px rgba(66, 217, 255, .5);
+    }
+
+.tech-btn-outline {
+    color: #ffffff;
+    border: 1px solid var(--tech-cyan);
+}
+
+    .tech-btn-outline:hover {
+        background: rgba(66, 217, 255, .12);
+        color: var(--tech-cyan);
+    }
+
+.tech-hero-visual {
+    width: 360px;
+    height: 360px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.tech-circle {
+    width: 240px;
+    height: 240px;
+    border: 2px solid var(--tech-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(66, 217, 255, .3), inset 0 0 30px rgba(66, 217, 255, .15);
+    animation: techPulse 4s ease-in-out infinite;
+}
+
+.tech-circle-inner {
+    width: 190px;
+    height: 190px;
+    border: 1px solid rgba(66, 217, 255, .5);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #a9edff;
+    letter-spacing: 3px;
+    font-size: 12px;
+    gap: 10px;
+}
+
+    .tech-circle-inner strong {
+        color: var(--tech-cyan);
+        font-size: 35px;
+    }
+
+.tech-orbit {
+    position: absolute;
+    border: 1px solid rgba(66, 217, 255, .35);
+    border-radius: 50%;
+}
+
+.orbit-one {
+    width: 310px;
+    height: 310px;
+    transform: rotateX(65deg);
+}
+
+.orbit-two {
+    width: 340px;
+    height: 340px;
+    transform: rotateY(65deg);
+}
+
+/* =====================================
+   HOMEPAGE CONTENT CARDS
+===================================== */
+
+.tech-section {
+    padding: 90px 7%;
+    background: var(--tech-bg);
+    color: #ffffff;
+}
+
+.tech-section-heading {
+    margin-bottom: 40px;
+}
+
+    .tech-section-heading h2 {
+        font-size: clamp(28px, 4vw, 42px);
+        font-weight: 800;
+    }
+
+.tech-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.tech-card {
+    padding: 35px;
+    background: linear-gradient(145deg, #102638, #091a28);
+    border: 1px solid var(--tech-border);
+    border-radius: 12px;
+    transition: .3s;
+}
+
+    .tech-card:hover {
+        transform: translateY(-7px);
+        border-color: var(--tech-cyan);
+        box-shadow: 0 10px 35px rgba(0, 180, 255, .12);
+    }
+
+.tech-card-number {
+    color: var(--tech-cyan);
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+.tech-card h3 {
+    margin-top: 25px;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.tech-card p {
+    color: var(--tech-muted);
+    line-height: 1.8;
+    margin: 15px 0 25px;
+}
+
+.tech-card a {
+    color: var(--tech-cyan);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+    .tech-card a:hover {
+        color: #ffffff;
+    }
+
+/* =====================================
+   ANIMATIONS
+===================================== */
+
+@keyframes techPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(66, 217, 255, .2), inset 0 0 20px rgba(66, 217, 255, .1);
+    }
+
+    50% {
+        box-shadow: 0 0 45px rgba(66, 217, 255, .5), inset 0 0 35px rgba(66, 217, 255, .2);
+    }
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 768px) {
+    .tech-hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 65px 6%;
+    }
+
+    .tech-description {
+        margin: auto;
+    }
+
+    .tech-buttons {
+        justify-content: center;
+    }
+
+    .tech-hero-visual {
+        width: 300px;
+        height: 300px;
+        transform: scale(.85);
+    }
+
+    .tech-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-section {
+        padding: 65px 6%;
+    }
+
+    .tech-navbar .navbar-collapse {
+        padding-top: 15px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+}
+
+/* =====================================
+   ABOUT ME PAGE
+===================================== */
+
+.about-page {
+    min-height: 75vh;
+    padding: 80px 7%;
+    background: radial-gradient(circle at 10% 20%, #0b2c40 0%, transparent 35%), #071521;
+    color: #ffffff;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.about-heading {
+    margin-bottom: 55px;
+}
+
+    .about-heading h1 {
+        font-size: clamp(40px, 6vw, 65px);
+        font-weight: 800;
+    }
+
+        .about-heading h1 span {
+            color: #42d9ff;
+        }
+
+    .about-heading > p:last-child {
+        color: #a9bdca;
+        max-width: 550px;
+    }
+
+.about-content {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-image-placeholder {
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #102638, #091a28);
+    border: 1px solid rgba(66, 217, 255, .3);
+    border-radius: 12px;
+    color: #42d9ff;
+    letter-spacing: 3px;
+    font-weight: 700;
+    box-shadow: 0 0 30px rgba(66, 217, 255, .08);
+}
+
+.about-information h2 {
+    font-size: clamp(25px, 4vw, 36px);
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.about-information > p:not(.tech-label) {
+    color: #a9bdca;
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+.about-details {
+    display: grid;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+    .about-details div {
+        padding: 17px;
+        background: #102638;
+        border-left: 3px solid #42d9ff;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .about-details span {
+        color: #42d9ff;
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .about-details strong {
+        color: #ffffff;
+        font-size: 14px;
+    }
+
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .about-image-placeholder {
+        min-height: 320px;
+    }
+}
+.about-profile-image {
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(66, 217, 255, .3);
+}
+
+    .about-profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+/* =====================================
+   FUTURISTIC COURSE & PROJECT CARDS
+===================================== */
+
+/* Card container */
+.card {
+    background: #0b1c2a !important;
+    border: 1px solid rgba(0, 195, 255, 0.35) !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.05);
+}
+
+/* Card content */
+.card-body {
+    background: #0b1c2a !important;
+    color: #dceaf5 !important;
+}
+
+/* Remove white footer */
+.card-footer,
+.card-footer.bg-white {
+    background: #071521 !important;
+    border-top: 1px solid rgba(0, 195, 255, 0.25) !important;
+    padding: 12px 16px !important;
+}
+
+    /* Make all card buttons blue */
+    .card-footer .btn {
+        background: transparent !important;
+        color: #35d9ff !important;
+        border: 1px solid #35d9ff !important;
+        border-radius: 5px !important;
+        font-weight: 500;
+        transition: 0.25s ease;
+    }
+
+        /* Button hover */
+        .card-footer .btn:hover {
+            background: #35d9ff !important;
+            color: #071521 !important;
+            box-shadow: 0 0 12px rgba(53, 217, 255, 0.5);
+        }
+
+/* Card image */
+.card-img-top {
+    border-bottom: 1px solid rgba(0, 195, 255, 0.2);
+}
+
+/* SATURN-STYLE ANIMATION */
+
+.tech-hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 900px;
+    transform-style: preserve-3d;
+}
+
+.tech-circle {
+    position: relative;
+    z-index: 2;
+    animation: planetGlow 3s ease-in-out infinite;
+}
+
+/* Saturn rings */
+.tech-orbit {
+    position: absolute;
+    width: 145%;
+    height: 65%;
+    border: 1px solid rgba(53, 217, 255, 0.55);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+.orbit-one {
+    z-index: 3;
+    animation: saturnRotate 8s linear infinite;
+}
+
+.orbit-two {
+    width: 165%;
+    height: 75%;
+    z-index: 1;
+    border-color: rgba(53, 217, 255, 0.3);
+    animation: saturnRotate 13s linear infinite reverse;
+}
+
+@keyframes saturnRotate {
+    from {
+        transform: rotateX(68deg) rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateX(68deg) rotateZ(360deg);
+    }
+}
+
+@keyframes planetGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px #35d9ff);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 22px #35d9ff);
+    }
 }

@@ -2,92 +2,83 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="container py-5">
+<section class="tech-hero">
+    <div class="tech-hero-content">
+        <p class="tech-label">
+            WELCOME TO MY PERSONAL PORTFOLIO
+        </p>
 
-    <div class="row align-items-center py-5">
+        <h1>
+             I AM ARRON LAROYA
+            <span>MULTIMEDIA ARTIST</span>
+        </h1>
 
-        <div class="col-lg-8">
+        <p class="tech-description">
+            Welcome to my academic portfolio. Explore my
+            creative projects, skills, courses, and experiences
+            in multimedia.
+        </p>
 
-            <p class="text-uppercase text-muted fw-bold">
-                Welcome to My Portfolio
-            </p>
+        <div class="tech-buttons">
+            <a asp-controller="Projects"
+               asp-action="Index"
+               class="tech-btn">
+                EXPLORE PROJECTS
+                <span>↗</span>
+            </a>
 
-            <h1 class="display-4 fw-bold mb-3">
-                Hello, I'm a Multimedia Student.
-            </h1>
-
-            <p class="lead text-muted mb-4">
-                Welcome to my academic portfolio. Here you can explore
-                the courses I have taken, the projects I have created,
-                and my learning experiences.
-            </p>
-
-            <div class="d-flex flex-wrap gap-3">
-
-                <a asp-controller="Courses"
-                   asp-action="Index"
-                   class="btn btn-primary btn-lg">
-                    Explore Courses
-                </a>
-
-                <a asp-controller="Projects"
-                   asp-action="Index"
-                   class="btn btn-outline-dark btn-lg">
-                    View My Projects
-                </a>
-
-            </div>
-
+            <a asp-controller="Courses"
+               asp-action="Index"
+               class="tech-btn-outline">
+                VIEW COURSES
+            </a>
         </div>
-
     </div>
 
-    <hr class="my-5" />
 
-    <div class="row g-4">
-
-        <div class="col-md-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body p-4">
-
-                    <h3 class="fw-bold">My Courses</h3>
-
-                    <p class="text-muted">
-                        Discover the subjects and courses that
-                        contributed to my learning journey.
-                    </p>
-
-                    <a asp-controller="Courses"
-                       asp-action="Index"
-                       class="btn btn-outline-primary">
-                        View Courses
-                    </a>
-
-                </div>
+    <div class="tech-hero-visual">
+        <div class="tech-circle">
+            <div class="tech-circle-inner">
+                <span>DESIGN</span>
+                <strong>+</strong>
+                <span>CREATIVITY</span>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body p-4">
+        <div class="tech-orbit orbit-one"></div>
+        <div class="tech-orbit orbit-two"></div>
+    </div>
+</section>
 
-                    <h3 class="fw-bold">My Projects</h3>
-
-                    <p class="text-muted">
-                        Explore my academic projects, images,
-                        and multimedia presentations.
-                    </p>
-
-                    <a asp-controller="Projects"
-                       asp-action="Index"
-                       class="btn btn-outline-primary">
-                        View Projects
-                    </a>
-
-                </div>
-            </div>
-        </div>
-
+<section class="tech-section">
+    <div class="tech-section-heading">
+        <p class="tech-label">EXPLORE MY PORTFOLIO</p>
+        <h2>WHAT YOU CAN <span>DISCOVER</span></h2>
     </div>
 
-</div>
+    <div class="tech-card-grid">
+        <div class="tech-card">
+            <span class="tech-card-number">01</span>
+            <h3>MY COURSES</h3>
+            <p>
+                Discover the subjects and lessons
+                that are part of my learning journey.
+            </p>
+            <a asp-controller="Courses" asp-action="Index">
+                EXPLORE COURSES ↗
+            </a>
+        </div>
+
+        <div class="tech-card">
+            <span class="tech-card-number">02</span>
+            <h3>MY PROJECTS</h3>
+            <p>
+                Explore my academic projects,
+                creative works, and multimedia outputs.
+            </p>
+            <a asp-controller="Projects" asp-action="Index">
+                VIEW PROJECTS ↗
+            </a>
+        </div>
+    </div>
+</section>

@@ -81,12 +81,6 @@
                                 @project.ProjectTitle
                             </h5>
 
-                            <p class="text-muted">
-                                @(string.IsNullOrWhiteSpace(project.Description)
-                                    ? "No description available."
-                                    : project.Description)
-                            </p>
-
                             <p class="small text-muted">
                                 Images: @(project.Images?.Count ?? 0)
                             </p>

@@ -1,7 +1,6 @@
 ﻿
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,124 +22,147 @@
 </head>
 
 <body>
-
     <header>
-
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-
-            <div class="container-fluid">
-
-                <a class="navbar-brand"
+        <nav class="navbar navbar-expand-lg tech-navbar">
+            <div class="container">
+                <a class="navbar-brand tech-brand"
                    asp-controller="Home"
                    asp-action="Index">
-                    portfolio
+                    <span class="brand-icon">P</span>
+                    PORTFOLIO<span class="brand-dot">.</span>
                 </a>
 
-                <button class="navbar-toggler"
+                <button class="navbar-toggler tech-toggler"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target=".navbar-collapse"
-                        aria-controls="navbarSupportedContent"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
-
                     <span class="navbar-toggler-icon"></span>
-
                 </button>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="collapse navbar-collapse"
+                     id="mainNavbar">
 
-                    <ul class="navbar-nav flex-grow-1">
+                    
+<ul class="navbar-nav ms-auto align-items-lg-center">
+    <li class="nav-item">
+        <a class="nav-link tech-nav-link"
+           asp-controller="Home"
+           asp-action="Index">
+            Home
+        </a>
+    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Courses"
-                               asp-action="Index">
-                                Courses
-                            </a>
-                        </li>
+    <li class="nav-item">
+        <a class="nav-link tech-nav-link"
+           asp-controller="Home"
+           asp-action="About">
+            About Me
+        </a>
+    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Projects"
-                               asp-action="Index">
-                                Projects
-                            </a>
-                        </li>
+    @if (User.IsInRole("Editor"))
+    {
+        <li class="nav-item">
+            <a class="nav-link tech-nav-link"
+               asp-controller="Courses"
+               asp-action="Index">
+                Courses
+            </a>
+        </li>
 
-                    </ul>
+        <li class="nav-item">
+            <a class="nav-link tech-nav-link"
+               asp-controller="Projects"
+               asp-action="Index">
+                Projects
+            </a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link tech-nav-link"
+               asp-controller="Projects"
+               asp-action="Index">
+                Courses
+            </a>
+        </li>
+    }
+</ul>
 
-                    <ul class="navbar-nav">
+                    
 
+
+
+
+                    <ul class="navbar-nav ms-lg-4 align-items-lg-center">
                         @if (User.IsInRole("Editor"))
                         {
-                            <li class="nav-item d-flex align-items-center">
-                                <span class="nav-link text-success fw-bold">
-                                    Editor Mode
+                            <li class="nav-item">
+                                <span class="editor-status">
+                                    <span class="status-dot"></span>
+                                    EDITOR MODE
                                 </span>
                             </li>
 
-                            <li class="nav-item">
+                            <li class="nav-item ms-lg-3">
                                 <form asp-controller="Editor"
                                       asp-action="SwitchToView"
-                                      method="post">
+                                      method="post"
+                                      class="d-inline-flex">
 
                                     @Html.AntiForgeryToken()
 
                                     <button type="submit"
-                                            class="btn btn-outline-secondary btn-sm mt-1">
-                                        Switch to View
+                                            class="tech-editor-btn">
+                                        SWITCH TO VIEW
                                     </button>
-
                                 </form>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="btn btn-primary btn-sm mt-1"
+                            <li class="nav-item ms-lg-3">
+                                <a class="tech-editor-btn"
                                    asp-controller="Editor"
                                    asp-action="Unlock">
-                                    Switch to Editor
+                                    SWITCH TO EDITOR
                                 </a>
                             </li>
+
                         }
-
                     </ul>
-
                 </div>
-
             </div>
-
         </nav>
-
     </header>
 
-    <div class="container">
+    <main role="main" class="tech-main">
+        @RenderBody()
+    </main>
 
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-
-    </div>
-
-    <footer class="border-top footer text-muted">
-
+    <footer class="tech-footer">
         <div class="container">
-            &copy; 2026 - portfolio
-        </div>
+            <div class="footer-content">
+                <span>
+                    © 2026 PORTFOLIO. ALL RIGHTS RESERVED.
+                </span>
 
+                <span class="footer-caption">
+                    CREATIVITY • TECHNOLOGY • INNOVATION
+                </span>
+            </div>
+        </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="~/js/site.js"
             asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
-
 </html>
